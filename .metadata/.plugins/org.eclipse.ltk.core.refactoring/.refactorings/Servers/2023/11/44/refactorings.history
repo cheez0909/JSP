@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;web.xml&apos; to &apos;Tomcat v9.0 Server at localhost-config&apos;" description="Move &apos;web.xml&apos; to &apos;Tomcat v9.0 Server at localhost-config&apos;" destination="Tomcat v9.0 Server at localhost-config" element1="/hellojsp/src/main/webapp/WEB-INF/web.xml" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1698911507651" updateReferences="true"/>
+</session>

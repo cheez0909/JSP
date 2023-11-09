@@ -1,0 +1,7 @@
+package com.momo.dto;
+
+public class myDTO {
+	private String EMP_NAME;
+	private String DEPT_TITLE; 
+	private String JOB_NAME;
+}

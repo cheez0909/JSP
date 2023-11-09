@@ -1,0 +1,10 @@
+package com.momo.dao;
+
+import javax.servlet.ServletContext;
+
+public class JobDAO {
+	// 생성자를 통해서
+	public JobDAO(ServletContext application) {
+		
+	}
+}

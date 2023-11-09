@@ -1,0 +1,5 @@
+package com.momo.dao;
+
+public class UserDAO {
+
+}

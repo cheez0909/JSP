@@ -1,0 +1,13 @@
+package com.momo.dao;
+
+import javax.servlet.ServletContext;
+
+import com.momo.DBConnection;
+
+public class myDAO extends DBConnection{
+
+	public myDAO(ServletContext application) {
+		super(application);
+	}
+
+}

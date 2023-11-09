@@ -1,0 +1,15 @@
+package com.momo.vo;
+
+public class myVO {
+	private String EMP_NAME;
+	
+	public String getEMP_NAME() {
+		return EMP_NAME;
+	}
+	public void setEMP_NAME(String eMP_NAME) {
+		EMP_NAME = eMP_NAME;
+	}
+	public String toString() {
+		return EMP_NAME;
+	}
+}

@@ -1,0 +1,7 @@
+package com.momo.dao;
+
+import com.momo.DBConnectionPool;
+
+public class BoardDAO extends DBConnectionPool{
+
+}

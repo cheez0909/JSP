@@ -1,0 +1,9 @@
+package com.momo;
+
+public class Job {
+	private String job_name;
+	private String job_code;
+	
+	
+
+}

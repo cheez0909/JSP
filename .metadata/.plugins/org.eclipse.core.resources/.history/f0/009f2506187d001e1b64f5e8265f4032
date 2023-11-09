@@ -1,0 +1,29 @@
+package com.momo.dao;
+
+import java.sql.SQLException;
+
+import com.momo.DBConnection;
+
+/*
+ * 데이터베이스에 접근 해서
+ * 데이터 입력, 출력, 삭제, 조회 작업을 처리하는 객체
+ * 
+ * Dao
+ * -> mapper
+ * 
+ */
+public class EmpDAO extends DBConnection{
+	public void getList() {
+		try {
+			stmtl = con.createStatement();
+			rs = stmtl.executeQuery("select * from employee");
+			rs.next();
+			rs.getString(1);
+			rs.getString(2);
+			rs.getString(3);
+		} catch (SQLException e) {
+			System.out.println("SQL예외 발생");
+			e.printStackTrace();
+		}
+	}
+}

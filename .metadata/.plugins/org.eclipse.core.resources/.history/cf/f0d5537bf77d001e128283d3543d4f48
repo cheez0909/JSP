@@ -1,0 +1,9 @@
+package com.momo.dto;
+
+public class membetDTO {
+
+	public membetDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

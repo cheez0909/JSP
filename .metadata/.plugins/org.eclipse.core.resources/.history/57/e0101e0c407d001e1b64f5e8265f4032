@@ -1,0 +1,13 @@
+package com.momo.dto;
+
+import javax.servlet.ServletContext;
+
+import com.momo.DBConnection;
+
+public class employeeDTO extends DBConnection{
+
+	public employeeDTO(ServletContext application) {
+		super(application);
+	}
+
+}

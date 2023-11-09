@@ -1,0 +1,26 @@
+package com.momo;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import org.apache.catalina.Context;
+import org.apache.tomcat.jdbc.pool.DataSource;
+
+public class DBConnectionPool {
+	public Connection con;
+	public Statement stmtl;
+	public PreparedStatement pstmt;
+	public ResultSet rs;
+	
+	
+	
+	public DBConnectionPool(){
+		Context initContext = new InitialContext();
+		Context envContext  = (Context)initContext.lookup("java:/comp/env");
+		DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle");
+		Connection conn = ds.getConnection();
+		
+	}
+}
