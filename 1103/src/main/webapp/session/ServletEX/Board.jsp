@@ -96,7 +96,7 @@ window.onload = function() {
 		for(BoardDTO num : dtos){%>
     <tr>
                 <td><%=num.getNum() %></td>
-                <td><a href="Boarddetails.jsp?num=<%=num.getNum()%>"><%=num.getTitle() %></a></td>
+                <td><a href="/session/ServletEX/detail?num=<%=num.getNum()%>&ids=<%=dto.getId()%>"><%=num.getTitle() %></a></td>
                 <td><%=num.getId() %></td>
 				<td><%=num.getPostdate() %></td>
 				<td><%=num.getVisitcount() %></td>

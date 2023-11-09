@@ -107,38 +107,15 @@
             <img src="https://item.kakaocdn.net/do/b563e153db82fde06e1423472ccf192c960f4ab09fe6e38bae8c63030c9b37f9">
         </div>
 <%
-
-	BoardDAO boarddao = new BoardDAO();
-	List<BoardDTO> boarddto = boarddao.getList(request.getParameter("id"));
-	request.setAttribute("boarddto", boarddto);
-	
-	String num = request.getParameter("num");
-
 	if(request.getAttribute("boarddto")!=null){
-		List<BoardDTO> dto = (List<BoardDTO>)request.getAttribute("boarddto");
-		
-		out.print(dto);
-		
-		if(dto!=null){
-			out.print("통과!");
-			
-			for(BoardDTO nums : dto){
-				out.print("(┬┬﹏┬┬)");
-				if(num.equals(nums.getNum())){
-				%>
-    	
-    			<h2><%=nums.getTitle() %><br><span><%=nums.getPostdate() %></span></h2>
-    			<p> <%=nums.getContent() %></p>
+		BoardDTO dtos = (BoardDTO) request.getAttribute("boarddto");
+		%>
+    			<h2><%=dtos.getTitle() %><br><span><%=dtos.getPostdate() %></span></h2>
+    			<p> <%=dtos.getContent() %></p>
 				<% } 
 				else {
 					out.print("(┬┬﹏┬┬)");
 				}		
-			}
-		}
-	} else {
-		out.print("불통과!");
-	}
-	
 %>
 
 
