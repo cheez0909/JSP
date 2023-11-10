@@ -20,25 +20,20 @@ public class detailController extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String num = request.getParameter("num");
-		String id = request.getParameter("ids");
+		
+		// String id = request.getParameter("ids");
+		
 		BoardDAO dao = new BoardDAO();
-		System.out.println(num+" "+id);
+		System.out.println(num+" ");
 		
-		List<BoardDTO> dto = dao.getList(id);
+		dao.visitCount(num);
+		BoardDTO dto = dao.getOne(num);
 		
 		
-		if(dto!=null) {
-			for(BoardDTO dtos : dto) {
-				BoardDTO boarddto = dtos;
-				if(boarddto.getNum().equals(num)) {
-					request.setAttribute("boarddto", dtos);
-				} else {
-					System.out.println("게시물을 찾을 수 없습니다");
-				}
-			}
-		} else {
-			System.out.println("로그인 사용자를 찾을 수 없습니다");
-		}
+		
+		request.setAttribute("boarddto", dto);
+		dao.close();
+		
 		request.getRequestDispatcher("Boarddetails.jsp").forward(request, response);
 	}
 }

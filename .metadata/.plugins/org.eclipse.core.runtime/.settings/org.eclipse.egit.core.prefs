@@ -1,5 +1,5 @@
-GitRepositoriesView.GitDirectories=C\:\\Users\\admin\\git\\helloJSP502\\.git;
-GitRepositoriesView.GitDirectories.relative=C\:\\Users\\admin\\git\\helloJSP502\\.git;
+GitRepositoriesView.GitDirectories=C\:\\Users\\admin\\git\\helloJSP502\\.git;C\:\\app\\hellojsp\\.git;
+GitRepositoriesView.GitDirectories.relative=C\:\\Users\\admin\\git\\helloJSP502\\.git;.git;
 RepositoryGroups.uuids=
 RepositorySearchDialogSearchPath=C\:\\Users\\admin\\git
 core_autoIgnoreDerivedResources=false

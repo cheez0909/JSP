@@ -12,8 +12,9 @@
     <title>UI card design css - Bootsnipp.com</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-        body {
+
+<style type="text/css">
+body {
     margin:0;
     padding:0;
     font-family:sans-serif;
@@ -25,11 +26,15 @@
     left:50%;
     transform:translate(-50%,-50%);
     width:300px;
-    min-height:400px;
+    min-height:500px;
     background:#fff;
     box-shadow:0 20px 50px rgba(0,0,0,.1);
     border-radius:10px;
     transition:0.5s;
+}
+
+.card .btn {
+	display:inline-flex;
 }
 .card:hover {
     box-shadow:0 30px 70px rgba(0,0,0,.2);
@@ -94,14 +99,59 @@
     color:#e91e63;
     transform:rotateY(360deg);
 }
-    </style>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+.card .btns {
+	position: absolute;
+    display:inline-flex;
+    bottom: 8px;
+    right : 8px;
+}
+
+.card .btns> #edit, #delete{
+	margin-right : 5px;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+window.onload = function(){
+	let listBtn = document.querySelector("#listBtn");
+	listBtn.onclick = function(){
+		location.href='/boardList';
+	}
+	
+	
+	let edit = document.querySelector('#edit');
+	
+	edit.onclick = function(){
+		location.href='/boardList';
+	}
+	
+	
+	if(edit!=null){
+	edit.addEventListener('click', function()->{
+		// jsp를 단독으로 실행할 경우, 경로문제가 발생하지 않음(같은 경로에 있기 때문에)
+		// 하지만 서블릿을 통해 들어오는 경우 경로문제가 발생할수 있어서
+		// 루트경로부터 풀 경로를 적어주는 것이 오류가 발생하지 않음
+		location.href='/session/ServletEX/deleteProcess.jsp';
+	});
+	};
+}
+</script>
+
+
 </head>
 <body>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <div class="card">
+		<button id="listBtn" class="btn btn-dark">리스트로 이동</button>
+	<div class="btns">
+		<button type="button" id="delete" class="btn btn-danger btn-xs">Del</button>
+    	<button type="button" id="edit" class="btn btn-info btn-xs">Edit</button>
+    </div>
     <div class="box">
         <div class="img">
             <img src="https://item.kakaocdn.net/do/b563e153db82fde06e1423472ccf192c960f4ab09fe6e38bae8c63030c9b37f9">
@@ -118,7 +168,6 @@
 				}		
 %>
 
-
 		<span>
             <ul>
                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -128,11 +177,12 @@
                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
             </ul>
         </span>
+		
     </div>
+    
 </div>
 
-<script type="text/javascript">
 
-</script>
+
 </body>
 </html>

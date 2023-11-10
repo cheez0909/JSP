@@ -35,7 +35,15 @@
   
   
 <!-- 객체 생성 -->
-<jsp:useBean id="BoardDTO" class="com.momo.dto.BoardDTO" scope="request"></jsp:useBean>
+<%
+	BoardDTO dtoex = new BoardDTO();
+	dtoex.setContent("내용");
+	dtoex.setTitle("제목");
+%>
+
+<jsp:useBean id="BoardDTO" 
+class="com.momo.dto.BoardDTO" 
+scope="request"></jsp:useBean>
 
 <!-- setProperty메서드를 이용해서 속성값을 지정 -->
 <!-- 
@@ -43,12 +51,12 @@
 	property : 필드명
 	value : 필드값
  -->
-
 <jsp:setProperty property="content" name="BoardDTO" value="내용" />
 <jsp:setProperty property="title" name="BoardDTO" value="제목" />
+
 <%
-	if(request.getAttribute("boarddto")!=null) {
-		BoardDTO dto = (BoardDTO)request.getAttribute("boarddto");
+	if(request.getAttribute("dtoex")!=null) {
+		BoardDTO dto = (BoardDTO)request.getAttribute("dtoex");
 %>
 	제목 : <%=dto.getTitle() %>
 	내용 : <%=dto.getContent() %>

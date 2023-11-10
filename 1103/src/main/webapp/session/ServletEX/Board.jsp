@@ -11,8 +11,10 @@
 <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <style type="text/css">
    .well{
+   
    margin-left:100px;
    margin-right:100px;}
+   
     </style>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
@@ -22,7 +24,6 @@
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-
 window.onload = function() {
 	
 	let logoutBtn = document.querySelector("#logout_button");
@@ -41,10 +42,23 @@ window.onload = function() {
 	if(loginBtn!=null){
 	loginBtn.addEventListener('click', function(){
 		alert("로그인합니다")
-		LoginForm.action = "Login.jsp";
+		// 경로 확인,,, 뒤돌아왔을때 안될수도 있음
+		//LoginForm.action = "Login.jsp";
+		LoginForm.action="/session/ServletEX/Login.jsp";
 		LoginForm.submit();
 	});
-}
+	}
+	
+	let deletebtn = document.querySelector("#delete");
+	
+	if(deletebtn!=null){
+	deletebtn.addEventListener('click', function(){
+		if(confirm("정말로 삭제하시겠습니까?")){
+			deletebtn.action="/delete";
+			deletebtn.submit();
+		};
+	});
+	}
 }
 
 </script>
@@ -55,9 +69,6 @@ window.onload = function() {
 	세션에 user_id가 null이 아니라면 로그아웃 버튼
 	null이면 로그인
  -->
- 
-
-	
 	
 <form name="LoginForm">
 <div class="navbar" style="user-select: auto;">
@@ -76,10 +87,15 @@ window.onload = function() {
     </div><!-- /navbar-inner -->
   </div>
 </form>	
-	
 
+<form>
 <div class="well">
+	<div class="header">
+		<H2>게시물 조회</H2>
+		<a class='btn btn-info btn-xs' href="/write" id="writebtn"><span class="glyphicon glyphicon-edit"></span>작성하기</a>
+	</div>
     <table class="table">
+    	
       <thead>
         <tr>
           <th>일련번호</th>
@@ -91,22 +107,26 @@ window.onload = function() {
         </tr>
       </thead>
        <%
-	if(request.getAttribute("boarddto")!=null){
+		if(request.getAttribute("boarddto")!=null){
 		List<BoardDTO> dtos = ( List<BoardDTO> ) request.getAttribute("boarddto");
 		for(BoardDTO num : dtos){%>
-    <tr>
+    	<tr>
                 <td><%=num.getNum() %></td>
-                <td><a href="/session/ServletEX/detail?num=<%=num.getNum()%>&ids=<%=dto.getId()%>"><%=num.getTitle() %></a></td>
+                <td><a href="/session/ServletEX/detail?num=<%=num.getNum()%>"><%=num.getTitle() %></a></td>
+                <%-- <td><a href="/session/ServletEX/detail?num=<%=num.getNum()%>&ids=<%=dto.getId()%>"><%=num.getTitle() %></a></td> --%>
                 <td><%=num.getId() %></td>
 				<td><%=num.getPostdate() %></td>
 				<td><%=num.getVisitcount() %></td>
-                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+                <td class="text-center">
+                <a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> 
+                <a class='btn btn-danger btn-xs' id="delete"><span class="glyphicon glyphicon-edit"></span>Del</button>
+                </td>
             </tr>
            <%} 
 }%>
-
-</table>
+	</table>
 </div>
+</form>
 <script type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>

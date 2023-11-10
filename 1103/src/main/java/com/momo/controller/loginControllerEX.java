@@ -25,18 +25,19 @@ public class loginControllerEX extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		memberDAO dao = new memberDAO();
 		memberDTO dto  = dao.login(request.getParameter("id"), request.getParameter("pw"));
+		
 		if(dto!=null) {
 			request.getSession().setAttribute("dto", dto);
-			;
 			
 			// 게시글 조회 후 request에 담아준다
 			BoardDAO boarddao = new BoardDAO();
-			List<BoardDTO> boarddto = boarddao.getList(request.getParameter("id"));
+			List<BoardDTO> boarddto = boarddao.getList();
 			request.setAttribute("boarddto", boarddto);
 						
 			// sendRedirect를 이용할 경우, request영역이 공유가 되지 않기 때문에
 			// list값을 화면으로 전달할 수 없다.
-			request.getRequestDispatcher("Board.jsp").forward(request, response);
+			//request.getRequestDispatcher("Board.jsp").forward(request, response);
+			response.sendRedirect("/boardList");
 					
 		} else {
 			request.getRequestDispatcher("Login.jsp?err=1").forward(request, response);
