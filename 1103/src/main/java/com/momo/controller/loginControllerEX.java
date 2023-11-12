@@ -28,6 +28,7 @@ public class loginControllerEX extends HttpServlet {
 		
 		if(dto!=null) {
 			request.getSession().setAttribute("dto", dto);
+			request.getSession().setAttribute("userId", dto.getId());
 			
 			// 게시글 조회 후 request에 담아준다
 			BoardDAO boarddao = new BoardDAO();

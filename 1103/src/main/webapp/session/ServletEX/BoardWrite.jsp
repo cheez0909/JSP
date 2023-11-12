@@ -8,7 +8,8 @@
 </head>
 <body>
 <h2>게시글 작성</h2>
-<form action="/write" method="post">
+
+<form action="/session/ServletEX/write" method="post">
 <table border="1">
 	<tr>
 		<td>제목</td>

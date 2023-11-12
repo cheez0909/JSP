@@ -74,7 +74,7 @@ window.onload = function() {
 <div class="navbar" style="user-select: auto;">
     <div class="navbar-inner" style="user-select: auto;">
       <div class="container" style="width: auto; user-select: auto;">
-        <a class="brand" href="Login.jsp" style="user-select: auto;">Board</a>
+        <a class="brand" href="/session/ServletEX/Login.jsp" style="user-select: auto;">Board</a>
          <%
 	memberDTO dto = (memberDTO) session.getAttribute("dto");
 	if(dto!=null){ %>
@@ -92,7 +92,7 @@ window.onload = function() {
 <div class="well">
 	<div class="header">
 		<H2>게시물 조회</H2>
-		<a class='btn btn-info btn-xs' href="/write" id="writebtn"><span class="glyphicon glyphicon-edit"></span>작성하기</a>
+		<a class='btn btn-info btn-xs' href="/session/ServletEX/BoardWrite.jsp?id=<%=dto.getId() %>" id="writebtn"><span class="glyphicon glyphicon-edit"></span>작성하기</a>
 	</div>
     <table class="table">
     	

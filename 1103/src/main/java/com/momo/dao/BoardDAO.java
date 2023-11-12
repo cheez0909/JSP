@@ -129,7 +129,7 @@ public class BoardDAO extends DBConnection{
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, num);
 		res = pstmt.executeUpdate();
-		System.out.println(res + "건이 실행되었습니다.");
+		// System.out.println(res + "건이 실행되었습니다.");
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -148,7 +148,7 @@ public class BoardDAO extends DBConnection{
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, num);
 		res = pstmt.executeUpdate();
-		System.out.println(res + "건이 실행되었습니다.");
+		// System.out.println(res + "건이 실행되었습니다.");
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -158,18 +158,19 @@ public class BoardDAO extends DBConnection{
 	
 	
 	// 작성하는 메서드 만들기
-	public int write(String title, String content) {
+	public int write(String title, String content, String id) {
 		BoardDTO dto = new BoardDTO();
 		
 		int res=0;
 		try {
 			
 		String sql = "insert into board (num, title, content, id) \r\n"
-				+ "values (SEQ_BOARD_NUM.NEXTVAL, ?, ?, 'test')";
+				+ "values (SEQ_BOARD_NUM.NEXTVAL, ?, ?, ?)";
 		
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, title);
 		pstmt.setString(2, content);
+		pstmt.setString(3, id);
 		res = pstmt.executeUpdate();
 		
 		System.out.println(res + "건이 실행되었습니다.");
@@ -181,6 +182,10 @@ public class BoardDAO extends DBConnection{
 	
 	//public static void main(String[] args) {
 	//	BoardDAO dao = new BoardDAO();
-	//	dao.write("제목", "내용");
+	//	int i=0;
+	//	while(i!=10) {
+	//		dao.write("제목", "내용");
+	//		i++;
+	//	}
 	//}
 }

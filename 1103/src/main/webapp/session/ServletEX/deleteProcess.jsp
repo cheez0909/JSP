@@ -14,9 +14,14 @@
 	if(request.getParameter("num")!=null){
 		String num = request.getParameter("num").toString();
 		BoardDAO dao = new BoardDAO();
+		
 		if(dao.deleteBoard(num)!=1){
 			JSFunction.alertBack("존재하지 않는 게시글입니다.", out);
+		} else{
+			dao.deleteBoard(num);
+			JSFunction.alertLocation("삭제되었습니다", "/boardList", out);
 		}
+		
 	}else{
 		// out.print("<script type='text/javascript'>");
 		// out.print("alert('test');");
