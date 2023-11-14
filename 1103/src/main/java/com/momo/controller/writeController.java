@@ -97,7 +97,7 @@ public class writeController extends HttpServlet {
 			return;
 		}
 		
-		request.getRequestDispatcher("Login.jsp").forward(request, response);
+		request.getRequestDispatcher("Board.jsp").forward(request, response);
 			
 		// } else {
 			
