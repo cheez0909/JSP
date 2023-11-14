@@ -2,5 +2,6 @@
 <modules>
   <module moduleId="org.eclipse.jst.jee.server:helloJsp" serverId="Tomcat v9.0 Server at localhost"/>
   <module moduleId="org.eclipse.jst.jee.server:1103" serverId="hello"/>
+  <module moduleId="org.eclipse.jst.jee.server:1114" serverId="login"/>
   <module moduleId="org.eclipse.jst.jee.server:hello" serverId="hello"/>
 </modules>

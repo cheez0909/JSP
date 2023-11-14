@@ -39,6 +39,7 @@ body {font-family: "Lato", sans-serif;}
 		<p>Login or register from here to access.</p>
 	</div>
 </div>
+
 <form action="login" method="post" name="loginFrm">
 <div class="main">
 	<div class="col-md-6 col-sm-12">
