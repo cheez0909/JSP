@@ -22,7 +22,7 @@ public class LogoutController extends HttpServlet {
 			request.getSession().invalidate();
 		}
 		System.out.println("세선 무효화");
-		response.sendRedirect("/session/ServletEX/Login.jsp");
+		response.sendRedirect("/boardList");
 	}
 	
 }

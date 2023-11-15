@@ -1,9 +1,0 @@
-package com.momo.dto;
-
-public class employeeDTO {
-
-	public employeeDTO() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

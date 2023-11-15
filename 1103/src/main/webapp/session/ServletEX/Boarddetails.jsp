@@ -133,25 +133,37 @@ window.onload = function(){
 			// jsp를 단독으로 실행할 경우, 경로문제가 발생하지 않음(같은 경로에 있기 때문에)
 			// 하지만 서블릿을 통해 들어오는 경우 경로문제가 발생할수 있어서
 			// 루트경로부터 풀 경로를 적어주는 것이 오류가 발생하지 않음
-			
-			location.href='/session/ServletEX/deleteProcess.jsp?num=<%=request.getParameter("num")%>';
+
+			/* location.href='/session/ServletEX/deleteProcess.jsp?num= */ <%--=request.getParameter("num")--%> //';
+			deleteFnc();
 		});
 		}
-	let edit = document.querySelector('#edit');
+	// let edit = document.querySelector('#edit');
 	
 	//edit.onclick = function(){
 	//	location.href='/boardList';
 	//};
 	
 	
-	if(edit!=null){
-		edit.addEventListener('click', ()=>{
+	//if(edit!=null){
+	//	edit.addEventListener('click', ()=>{
 			// jsp를 단독으로 실행할 경우, 경로문제가 발생하지 않음(같은 경로에 있기 때문에)
 			// 하지만 서블릿을 통해 들어오는 경우 경로문제가 발생할수 있어서
 			// 루트경로부터 풀 경로를 적어주는 것이 오류가 발생하지 않음
-			location.href='/session/ServletEX/deleteProcess.jsp';
-		});
+	//		location.href='/session/ServletEX/deleteProcess.jsp';
+	//	});
+	//	};
+		
+		function deleteFnc(){
+			if(confirm("정말로 삭제하시겠습니까?")){
+				// deletebtn.action="/delete";
+				location.href='/deleteprocess?num=<%=request.getParameter("num")%>';
+				deletebtn.submit();
+			} else{
+				alert('취소 클릭');
+			};
 		};
+		
 }
 
 </script>

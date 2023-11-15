@@ -1,3 +1,4 @@
+<%@page import="com.momo.dto.Criteria"%>
 <%@page import="com.momo.dto.BoardDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.momo.dto.memberDTO"%>
@@ -38,7 +39,7 @@ window.onload = function() {
 	
 	
 	let loginBtn = document.querySelector("#login_button");
-	
+
 	if(loginBtn!=null){
 	loginBtn.addEventListener('click', function(){
 		alert("로그인합니다")
@@ -49,16 +50,26 @@ window.onload = function() {
 	});
 	}
 	
-	let deletebtn = document.querySelector("#delete");
+	/* 취소버튼
+	let deletebtn = document.querySelector("#deletebtn");
 	
 	if(deletebtn!=null){
 	deletebtn.addEventListener('click', function(){
-		if(confirm("정말로 삭제하시겠습니까?")){
-			deletebtn.action="/delete";
-			deletebtn.submit();
-		};
+		deleteFnc();
 	});
 	}
+	
+	function deleteFnc(){
+		alert('삭제버튼이 클릭되었습니다.');
+		if(confirm("정말로 삭제하시겠습니까?")){
+			deletebtn.action="/delete";
+			// location.href="/delete";
+			deletebtn.submit();
+		} else{
+			alert('취소 클릭');
+		};
+	}
+	*/
 }
 
 </script>
@@ -92,7 +103,10 @@ window.onload = function() {
 <div class="well">
 	<div class="header">
 		<H2>게시물 조회</H2>
-		<a class='btn btn-info btn-xs' href="/session/ServletEX/BoardWrite.jsp?id=<%=dto.getId() %>" id="writebtn"><span class="glyphicon glyphicon-edit"></span>작성하기</a>
+		<% if(dto!=null){ %>
+		<a href="/session/ServletEX/BoardWrite.jsp"><button type="button" class="btn btn-info btn-xs" id="writebtn" style="user-select: auto;"><span class="glyphicon glyphicon-edit"></span>작성하기</button></a>
+		<%} %>
+		
 	</div>
     <table class="table">
     	
@@ -103,7 +117,6 @@ window.onload = function() {
             <th>작성자</th>
             <th>작성일</th>
 			<th>조회수</th>
-            <th class="text-center">Action</th>
         </tr>
       </thead>
        <%
@@ -118,13 +131,68 @@ window.onload = function() {
 				<td><%=num.getPostdate() %></td>
 				<td><%=num.getVisitcount() %></td>
                 <td class="text-center">
-                <a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> 
-                <a class='btn btn-danger btn-xs' id="delete"><span class="glyphicon glyphicon-edit"></span>Del</button>
+                <%--
+        			if(dto.getId().equals(num.getId()))
+        			{ 
+        				out.print("<button id='deletebtn' class='btn btn-danger btn-xs'>del</button>");
+        				out.print("<button id='deletebtn' class='btn btn-info btn-xs'>Edit</button>");
+        			}
+                --%>
                 </td>
             </tr>
-           <%} 
-}%>
+           <%
+        }
+}
+%>
 	</table>
+	<!-- 
+		페이지 네비게이션 작성
+		- 페이지 번호
+		- 페이지블럭당 페이지 수
+		- 페이지블럭의 시작번호 ~ 페이지블럭의 끝번호
+		
+		총 게시물의 수 totalCnt
+		- 페이지당 게시물의 수 amount
+		진짜 블럭의 끝번호
+	 -->
+	<%
+		out.print("=============================================================================");
+		int endNo = 0;
+		int startNo = 0;
+		
+		// 연산을 위해서 (올림처리를 위해)
+		double pagePerBlock = 10.0;
+
+		Criteria cri = new Criteria();
+		int totalCnt = 0;
+		
+		if(request.getAttribute("page") != null && !"".equals(request.getAttribute("page"))){
+			cri = (Criteria) request.getAttribute("page");
+			out.print("요청페이지번호 - pageNo : " + cri.getPageNo());
+			out.print("페이지당 게시물 수 - amout : " + cri.getAmount());
+		} else{
+			out.print("request.getAttribute('page')값이 없습니다");
+		}
+		
+		if(request.getAttribute("totalCnt") != null && !"".equals(request.getAttribute("totalCnt"))){
+			totalCnt = Integer.parseInt(request.getAttribute("totalCnt").toString());
+			out.print("총 게시물의 수" + totalCnt);
+		} else{
+			out.print("request.getAttribute('totalCnt')값이 없습니다");
+		}
+		
+		// 페이지 블럭의 시작 번호와 끝번호 구하기
+		// 끝번호 구하기
+		// 7페이지 요청 : 올림 (7/10.0) * 10 
+		// 11페이지 요청 : 올림(11/10.0) * 10
+		endNo = (int) (Math.ceil( cri.getPageNo() / pagePerBlock) * pagePerBlock);
+		startNo = endNo - ((int) pagePerBlock - 1);
+		
+		// 페이지 블럭을 생성
+		for(int i=startNo; i<=endNo; i++){
+			out.print("<a href='/BoardList?pageNo="+i+"'>" + i + "</a>");
+		}
+	%>
 </div>
 </form>
 <script type="text/javascript"></script>

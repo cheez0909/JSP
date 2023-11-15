@@ -7,6 +7,7 @@ import java.util.List;
 import com.momo.DBConnection;
 import com.momo.DBConnectionPool;
 import com.momo.dto.BoardDTO;
+import com.momo.dto.Criteria;
 
 // DBConnectionPool : 톰캣에서 제공해주는 기능을 사용하며 커넥션풀이라는 공간에 커넥션 객체를 미리
 // 생성해놓고 사용
@@ -40,22 +41,46 @@ public class BoardDAO extends DBConnection{
 				dto.setVisitcount(rs.getString("visitcount"));
 				list.add(dto);
 			}
-			close();
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
-	
+	/*
+	 * 
+	 * 리스트 조회 후 변환
+	 * + 페이징 처리
+	 * return
+	 * 
+	 * */
 	// 리스트 조회하는 메서드
-	public List<BoardDTO> getList(){
+	public List<BoardDTO> getList(Criteria cri){
 		List<BoardDTO> list = new ArrayList<>();
-		try {
-		String sql = "SELECT *\r\n"
-				+ "FROM BOARD\r\n";
+//		String sql = "SELECT *\r\n"
+//				+ "FROM BOARD\r\n";
 		
-			stmtl = con.createStatement();
-			rs = stmtl.executeQuery(sql);
+		// 페이징 처리하기
+		String sql = "select *\r\n"
+				+ "from (select rownum rnum, b.*\r\n"
+				+ "        from  (  -- 최신순으로 조회\r\n"
+				+ "                select *\r\n"
+				+ "                from board\r\n"
+				+ "                order by num desc) b\r\n"
+				+ "        )\r\n"
+				+ "where rnum between ? and ?";
+		try {
+		
+			pstmt = con.prepareStatement(sql);
+			// 시작번호 = 끝번호 - (페이지당게시물수 -1)
+			pstmt.setInt(1, cri.getStartNo());
+			// 끝번호 = 페이지번호 * 페이지당게시물수
+			pstmt.setInt(2, cri.getEndNo());
+			
+			// 페이지 객체를 생성해야함
+			// 페이지 
+			
+			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				BoardDTO dto = new BoardDTO();
@@ -67,7 +92,7 @@ public class BoardDAO extends DBConnection{
 				dto.setVisitcount(rs.getString("visitcount"));
 				list.add(dto);
 			}
-			close();
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -98,7 +123,7 @@ public class BoardDAO extends DBConnection{
 			dto.setPostdate(rs.getString("postdate"));
 			dto.setVisitcount(rs.getString("visitcount"));
 		}
-		close();
+		
 		} catch (SQLException e) {
 		e.printStackTrace();
 		}
@@ -179,6 +204,37 @@ public class BoardDAO extends DBConnection{
 			e.printStackTrace();
 		}	return res;
 	}
+	
+	
+	
+	/*
+	 * 게시글의 총 건수를 조회 후 반환
+	 * return 게시글의 총 건수
+	 * 
+	 */
+	public int getTotalCnt() {
+		int res = 0;
+		String sql = "select count(*)\r\n"
+				+ "from board";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			//rs = stmtl.executeQuery(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				res = rs.getInt(1);
+				System.out.println(res);
+			}
+			
+			System.out.println(res);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 	
 	//public static void main(String[] args) {
 	//	BoardDAO dao = new BoardDAO();

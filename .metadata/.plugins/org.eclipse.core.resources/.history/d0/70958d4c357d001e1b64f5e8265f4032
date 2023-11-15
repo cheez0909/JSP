@@ -1,9 +1,0 @@
-package com.momo.dao;
-
-public class myDAO {
-
-	public myDAO() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
