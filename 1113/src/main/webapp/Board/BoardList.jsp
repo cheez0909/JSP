@@ -23,8 +23,7 @@
 		</tr>
 	</thead>
 
-		
-<%	
+		<%	
 	if(request.getAttribute("List")!=null){
 	List<BoardDTO> list = (List<BoardDTO>) request.getAttribute("List");
 	for(BoardDTO dto : list){ %>
@@ -39,6 +38,14 @@
 					<%}
 	}
 	%>
+
+	
+	${requestScope.List }
+	${requestScope.List[0] }
+	${requestScope.List[1] }
+	${requestScope.List[2] }
+	${requestScope.List[3] }
+	${requestScope.List[4] }
 
 </table>
 </body>

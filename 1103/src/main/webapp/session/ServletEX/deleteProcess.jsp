@@ -18,8 +18,15 @@
 		if(dao.deleteBoard(num)!=1){
 			JSFunction.alertBack("존재하지 않는 게시글입니다.", out);
 		} else{
-			dao.deleteBoard(num);
-			JSFunction.alertLocation("삭제되었습니다", "/boardList", out);
+			//dao.deleteBoard(num);
+			//out.print("<script>");
+			//out.print("alert('메롱')");
+			//out.print("location.href='/boardList?&pageNo="+request.getParameter("pageNo"));
+			//out.print("</script>");
+			
+			// JSFunction.alertBack("삭제되었습니다", out);
+			// JSFunction.alertLocation("삭제되었습니다", "/boardList?pageNo=<%=request.getParameter(\"pageNo\")", out);
+			//JSFunction.alertBack("삭제되었씁니다", out);
 		}
 		
 	}else{

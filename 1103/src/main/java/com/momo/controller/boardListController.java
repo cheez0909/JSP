@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.momo.dao.BoardDAO;
 import com.momo.dto.Criteria;
+import com.momo.dto.PageDTO;
 
 /**
  * Servlet implementation class boardListController
@@ -20,26 +21,28 @@ public class boardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		// 리스트 조회 후 리퀘스트 영역에 저장
-		BoardDAO dao = new BoardDAO();
-		
-		// 리스트 조회하기 위한 파라미터 수집
-		Criteria page = new Criteria(request.getParameter("pageNo"), request.getParameter("amount"));
-				
-		
-		request.setAttribute("boarddto", dao.getList(page));
-
-		// 페이지 블럭을 생성하기 위해 필요한 정보를 저장
-		request.setAttribute("page", page);
-		
-		request.setAttribute("totalCnt", dao.getTotalCnt());
-		
+			
+				// 리스트 조회 후 리퀘스트 영역에 저장
+				BoardDAO dao = new BoardDAO();
 				
 				
-		// 페이지 전환 forward방식으로 전환하므로 request영역이 공유됨
-		request.getRequestDispatcher("/session/ServletEX/Board.jsp").forward(request, response);
+				// 리스트 조회하기 위한 파라미터 수집
+				Criteria criteria = new Criteria(request.getParameter("pageNo"), request.getParameter("amount"));
+				PageDTO page = new PageDTO(dao.getTotalCnt(), criteria);
+				request.setAttribute("boarddto", dao.getList(criteria));
+				
+				// 페이지 블럭을 생성하기 위해 필요한 정보를 저장
+				request.setAttribute("criteria", criteria);
+				request.setAttribute("page", page);
+						
+				// request.setAttribute("totalCnt", dao.getTotalCnt());
+				// System.out.println(dao.getTotalCnt());
+				
+				dao.close();
+				// 페이지 전환 forward방식으로 전환하므로 request영역이 공유됨
+				request.getRequestDispatcher("/session/ServletEX/Board.jsp").forward(request, response);
 	}
+	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -47,17 +50,18 @@ public class boardListController extends HttpServlet {
 		BoardDAO dao = new BoardDAO();
 		
 		// 리스트 조회하기 위한 파라미터 수집
-		Criteria page = new Criteria(request.getParameter("pageNo"), request.getParameter("amount"));
-						
-		request.setAttribute("boarddto", dao.getList(page));
+		Criteria criteria = new Criteria("1", "10");
+		PageDTO page = new PageDTO(dao.getTotalCnt(), criteria);
+		request.setAttribute("boarddto", dao.getList(criteria));
 		
 		// 페이지 블럭을 생성하기 위해 필요한 정보를 저장
+		request.setAttribute("criteria", criteria);
 		request.setAttribute("page", page);
 				
-		request.setAttribute("totalCnt", dao.getTotalCnt());
+		// request.setAttribute("totalCnt", dao.getTotalCnt());
 		// System.out.println(dao.getTotalCnt());
 		
-		
+		dao.close();
 		// 페이지 전환 forward방식으로 전환하므로 request영역이 공유됨
 		request.getRequestDispatcher("/session/ServletEX/Board.jsp").forward(request, response);
 	}

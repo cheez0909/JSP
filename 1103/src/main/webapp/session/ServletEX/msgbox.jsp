@@ -19,7 +19,7 @@ window.onload = function(){
 	} else{
 		// 뒤로가기	
 		// history.back();
-		location.href='/boardList';
+		location.href='/boardList?pageNo=<%=request.getAttribute("pageNo")%>';
 	}
 }
 </script>

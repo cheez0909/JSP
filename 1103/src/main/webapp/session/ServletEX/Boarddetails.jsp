@@ -120,7 +120,8 @@ window.onload = function(){
 	
 	
 	listBtn.onclick = function(){
-		location.href='/boardList';
+		//location.href='/boardList';
+		history.back();
 	};
 	
 	
@@ -157,7 +158,7 @@ window.onload = function(){
 		function deleteFnc(){
 			if(confirm("정말로 삭제하시겠습니까?")){
 				// deletebtn.action="/delete";
-				location.href='/deleteprocess?num=<%=request.getParameter("num")%>';
+				location.href='/deleteprocess?num=<%=request.getParameter("num")%>&pageNo=<%=request.getParameter("pageNo")%>';
 				deletebtn.submit();
 			} else{
 				alert('취소 클릭');
@@ -175,7 +176,7 @@ window.onload = function(){
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="card">
-		<button id="listBtn" class="btn btn-dark">리스트로 이동</button>
+		<button type="button" id="listBtn" class="btn btn-dark">리스트로 이동</button>
 	<div class="btns">
 		<button type="button" id="delete" class="btn btn-danger btn-xs">Del</button>
     	<button type="button" id="edit" class="btn btn-info btn-xs">Edit</button>
@@ -195,6 +196,7 @@ window.onload = function(){
 					out.print("(┬┬﹏┬┬)");
 				}		
 %>
+
 
 		<span>
             <ul>

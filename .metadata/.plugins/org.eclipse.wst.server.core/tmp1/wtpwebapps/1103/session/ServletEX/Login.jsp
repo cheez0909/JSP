@@ -62,8 +62,6 @@ body {font-family: "Lato", sans-serif;}
 				</div>
 				
 				<button type="submit" class="btn btn-black">Login</button>
-				
-			
 		</div>
 	</div>
 </div>

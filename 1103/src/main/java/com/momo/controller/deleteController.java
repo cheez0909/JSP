@@ -28,6 +28,7 @@ public class deleteController extends HttpServlet {
 			// 삭제 성공
 			response.setContentType("text/html; charset=UTF-8");
 			request.setAttribute("msg", "삭제되었습니다.");
+			request.setAttribute("pageNo", request.getParameter("pageNo"));
 		} else {
 			// 삭제 실패
 			// response.setContentType("text/html; charset=UTF-8");

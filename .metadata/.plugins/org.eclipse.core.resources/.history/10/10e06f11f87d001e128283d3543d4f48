@@ -1,9 +1,0 @@
-package com.momo.dao;
-
-public class memberDAO {
-
-	public memberDAO() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

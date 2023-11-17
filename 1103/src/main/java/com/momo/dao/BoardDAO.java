@@ -224,7 +224,7 @@ public class BoardDAO extends DBConnection{
 			
 			if(rs.next()) {
 				res = rs.getInt(1);
-				System.out.println(res);
+				//System.out.println(res);
 			}
 			
 			System.out.println(res);

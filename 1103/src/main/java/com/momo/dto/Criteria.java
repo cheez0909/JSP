@@ -9,14 +9,27 @@ public class Criteria {
 	private int amount = 10;
 	private int startNo;
 	private int endNo;
+	
 	public Criteria() {}
+	
+	/*
+	 * 생성자를 통해 값을 세팅함
+	 * 
+	 * 
+	 */
 	public Criteria(String pageNo, String amount) {
 		if(pageNo != null && "".equals(pageNo)) {
 			this.pageNo = Integer.parseInt(pageNo);
+		} else {
+			this.pageNo = Integer.parseInt(pageNo);
 		}
+
 		if(amount != null && "".equals(amount)) {
 			this.amount = Integer.parseInt(amount);
-		}
+		} 
+		//else {
+			// this.amount = Integer.parseInt(amount);
+		//}
 		
 		// 필드를 선택하고 싶을 때 this를 붙임
 		endNo = this.pageNo * this.amount;
@@ -32,6 +45,14 @@ public class Criteria {
 		return amount;
 	}
 
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 
 	public int getStartNo() {
 		return startNo;

@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.ClassNotFoundException"/>
-    <fullyQualifiedTypeName name="java.sql.Date"/>
-    <fullyQualifiedTypeName name="com.momo.dto.EmpDTO"/>
-    <fullyQualifiedTypeName name="com.momo.Job"/>
-    <fullyQualifiedTypeName name="org.apache.catalina.tribes.group.Response"/>
     <fullyQualifiedTypeName name="com.momo.dao.myDAO"/>
     <fullyQualifiedTypeName name="com.momo.dto.myDTO"/>
     <fullyQualifiedTypeName name="javax.servlet.Servlet"/>
@@ -20,11 +15,9 @@
     <fullyQualifiedTypeName name="com.momo.dao.memberDAO"/>
     <fullyQualifiedTypeName name="com.momo.dto.memberDTO"/>
     <fullyQualifiedTypeName name="com.momo.DBConnectionPool"/>
-    <fullyQualifiedTypeName name="com.momo.DBConnection"/>
     <fullyQualifiedTypeName name="com.momo.dto.BoardDTO"/>
     <fullyQualifiedTypeName name="javax.servlet.jsp.JspWriter"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
-    <fullyQualifiedTypeName name="com.momo.dao.BoardDAO"/>
     <fullyQualifiedTypeName name="java.lang.Class"/>
     <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
     <fullyQualifiedTypeName name="java.sql.DriverManager"/>
@@ -43,12 +36,28 @@
     <fullyQualifiedTypeName name="java.sql.Statement"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="javax.naming.NamingException"/>
-    <fullyQualifiedTypeName name="java.sql.SQLException"/>
     <fullyQualifiedTypeName name="com.login.common.DBConnectionPool"/>
     <fullyQualifiedTypeName name="com.login.dao.HelloDAO"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.login.dao.EmployeeDAO"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.login.dto.EmployeeDTO"/>
+    <fullyQualifiedTypeName name="com.momo.utils.JSFunction"/>
+    <fullyQualifiedTypeName name="com.momo.DBConnection"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="com.momo.MakeTestData"/>
+    <fullyQualifiedTypeName name="com.momo.dao.BoardDAO"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.repository.MemberRepository"/>
+    <fullyQualifiedTypeName name="javax.sound.midi.Sequence"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.repository.MemoryMemberRepository"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
+    <fullyQualifiedTypeName name="com.domain.Member"/>
+    <fullyQualifiedTypeName name="com.momo.dto.Criteria"/>
+    <fullyQualifiedTypeName name="com.momo.dto.PageDTO"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
 </qualifiedTypeNameHistroy>

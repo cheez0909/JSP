@@ -45,7 +45,7 @@ public class loginControllerEX extends HttpServlet {
 			// list값을 화면으로 전달할 수 없다.
 			request.getRequestDispatcher("/boardList").forward(request, response);
 			// response.sendRedirect("/boardList");
-					
+			
 		} else {
 			request.getRequestDispatcher("Login.jsp?err=1").forward(request, response);
 		}

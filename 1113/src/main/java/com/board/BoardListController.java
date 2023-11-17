@@ -24,6 +24,7 @@ public class BoardListController extends HttpServlet {
 		
 		// 자원 반납
 		dao.close();
-		// request.getRequestDispatcher("/Board/BoardList.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("/Board/BoardList.jsp").forward(request, response);
 	}
 }
