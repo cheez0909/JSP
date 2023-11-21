@@ -100,6 +100,8 @@ public class BoardDAO extends DBConnection{
 	}
 	
 	
+	
+	
 	// 1건을 조회하는 메서드
 	public BoardDTO getOne(String num) {
 	

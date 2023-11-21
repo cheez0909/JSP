@@ -7,7 +7,15 @@ public class BoardDTO {
 	private String id;
 	private String postdate;
 	private String visitcount;
-	 
+	public BoardDTO() {}
+	public BoardDTO(String num, String title, String content, String id, String postdate, String visitcount) {
+		this.num = num;
+		this.title = title;
+		this.content = content;
+		this.id = id;
+		this.postdate = postdate;
+		this.visitcount = visitcount;
+	}
 	public String getNum() {
 		return num;
 	}

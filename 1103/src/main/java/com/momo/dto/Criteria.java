@@ -10,7 +10,10 @@ public class Criteria {
 	private int startNo;
 	private int endNo;
 	
-	public Criteria() {}
+	public Criteria() {
+		endNo = pageNo * amount;
+		startNo = endNo - (amount - 1);
+	}
 	
 	/*
 	 * 생성자를 통해 값을 세팅함

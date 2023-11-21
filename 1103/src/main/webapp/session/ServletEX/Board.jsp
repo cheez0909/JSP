@@ -5,6 +5,10 @@
 <%@page import="com.momo.dto.memberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html style="user-select: auto;">
 <head>
@@ -152,29 +156,26 @@ window.onload = function() {
 	null이면 로그인
  -->
 	
-	
-	
-
-	
-	
-	
-<form name="LoginForm">
 <div class="navbar" style="user-select: auto;">
     <div class="navbar-inner" style="user-select: auto;">
       <div class="container" style="width: auto; user-select: auto;">
         <a class="navbar-brand" href="/session/ServletEX/Login.jsp" style="user-select: auto;">Board</a>
-         <%
-	memberDTO dto = (memberDTO) session.getAttribute("dto");
-	if(dto!=null){ %>
-		<%=dto.getName() %> &nbsp; welcome! &nbsp; &nbsp;
-		<button type="button" class="btn btn-secondary my-2 my-sm-0" id="logout_button" style="user-select: auto;">logout</button>
-	<%} else {%>
-		<button type="button" class="btn btn-dark" id="login_button" style="user-select: auto;">login</button>
-	<%} %>
+		<form name="LoginForm">
+        <c:if test="${empty sessionScope.userId }">
+        <button type="button" class="btn btn-dark" id="login_button" style="user-select: auto;">login</button>
+        </c:if>
+        <c:if test="${not empty sessionScope.userId }">
+        ${sessionScope.userId } &nbsp; welcome! &nbsp; &nbsp;
+        <button type="button" class="btn btn-secondary my-2 my-sm-0" id="logout_button" style="user-select: auto;">logout</button>
+        </c:if>
+      	</form>
       </div>
     </div><!-- /navbar-inner -->
+      	<form class="d-flex" style="user-select: auto;">
+        <input class="form-control me-sm-2" type="search" placeholder="Search" style="user-select: auto;">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit" style="user-select: auto;">Search</button>
+      </form>
   </div>
-</form>	
 
 <br/>
 <br/>
@@ -194,10 +195,16 @@ window.onload = function() {
 <div class="well">
 	<div class="header">
 	<H2 style="float: left;">Board</H2>
-		<% if(dto!=null){ %>
+	<c:if test="${empty dto }"  var="dto">
 	<a href="/session/ServletEX/BoardWrite.jsp" style="float: right;"><button type="button" class="btn btn-info btn-xs" id="writebtn"><span class="glyphicon glyphicon-edit"></span>New</button></a>
-		<%} %>
+	</c:if>
 	</div>
+	<%--  jstl 태그 이용하기
+          <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+          <c:forEach items="${boarddto }" var="boarddtovar">
+          ${boarddtovar.title } / ${boarddtovar.id }
+          </c:forEach>
+       --%>
     <table class="table">
       <thead>
         <tr>
@@ -208,17 +215,28 @@ window.onload = function() {
 			<th>views</th>
         </tr>
       </thead>
-       <%
-		if(request.getAttribute("boarddto")!=null){
-		List<BoardDTO> dtos = ( List<BoardDTO> ) request.getAttribute("boarddto");
-		for(BoardDTO num : dtos){%>
-    	<tr>
-                <td><%=num.getNum() %></td>
-                <td><a href="/session/ServletEX/detail?num=<%=num.getNum()%>&pageNo=<%=pages.getCriteria().getPageNo()%>"><%=num.getTitle() %></a></td>
+      
+      <!-- 리스트가 비어있다면 데이터가 없습니다 출력 -->
+      <!-- 리스트가 비어있지 않으면 목록을 출력 -->
+      
+      <c:if test="${empty boarddto}" var="result">
+      no data
+      </c:if>
+      <c:if test="${not result }">
+      <c:forEach var="num" items="${boarddto}">
+      	<tr>
+                <td>${num.num }</td>
+                <td><a href="/session/ServletEX/detail?num=${num.num }&pageNo=<%=pages.getCriteria().getPageNo()%>">${num.title }</a></td>
                 <%-- <td><a href="/session/ServletEX/detail?num=<%=num.getNum()%>&ids=<%=dto.getId()%>"><%=num.getTitle() %></a></td> --%>
-                <td><%=num.getId() %></td>
-				<td><%=num.getPostdate() %></td>
-				<td><%=num.getVisitcount() %></td>
+                <td>${num.id }</td>
+				<td>${num.postdate }</td>
+				<td>${num.visitcount }</td>
+		</tr>
+      </c:forEach>
+      </c:if>
+ 
+
+    
                 
                 <%--
                 <td class="text-center">
@@ -230,11 +248,7 @@ window.onload = function() {
         			  </td>
                 --%>
               
-            </tr>
-           <%
-        }
-}
-%>
+      
 
 	</table>
 	<!-- 
