@@ -15,14 +15,11 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" style="user-select: auto;">
-<link rel="stylesheet" href="../5/sketchy/bootstrap.css" style="user-select: auto;">
-<link rel="stylesheet" href="../_vendor/bootstrap-icons/font/bootstrap-icons.min.css" style="user-select: auto;">
-<link rel="stylesheet" href="../_vendor/prismjs/themes/prism-okaidia.css" style="user-select: auto;">
-<link rel="stylesheet" href="../_assets/css/custom.min.css" style="user-select: auto;">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KGDJBEFF3W" style="user-select: auto;"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sketchy/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" style="user-select: auto;">
 </head>
 
     <style type="text/css">
@@ -38,7 +35,6 @@
  }
 
  
-
 
     </style>
     <script style="user-select: auto;">
@@ -98,16 +94,73 @@ window.onload = function() {
 		};
 	}
 	*/
+	
+	// select 요소의 옵션을 선택하는 방법
+	let searchField = '${pages.criteria.searchField}'; // 왜 안나오지..
+	console.log("searchField : ", searchField);
+	let options = searchForm.searchField.options;
+	
+	for(let i=0; i<options.length; i++ ){
+		options[i].removeAttribute("selected");
+	}
+		
+		
+	// select 요소의 옵션이 selected 속성을 부여
+	for(let i=0; i<searchForm.searchField.options.length; i++){
+		console.log(searchForm.searchField.options[i].value);
+		if(searchForm.searchField.options[i].value==searchField){
+			searchForm.searchField.options[i].setAttribute("selected", "selected")
+		}
+	}
+	
+	
 }
 
+/*
+ *입력받은 페이지 번호로 이동합니다
+ */
+ 
+function goPage(pageNo){
+	searchForm.pageNo.value=pageNo;
+	searchForm.submit();
+	// searchForm.action='/boardList';
+	// location.href="/boardList";
+}
+
+
+ // 게시글의 넘버만 받아오면됨
+ // 페이지 넘버는 이미 있음
+function goDetail(num){
+	// 파라미터로 넘어온 페이지번호를 searchForm에 pageNo에 입력
+	searchForm.action='/session/ServletEX/detail';
+	searchForm.num.value = num;
+	searchForm.submit();
+	// location.href="/boardList";
+}
+
+ // 폼을 전송(요청)한다
+ function forSubmit(){
+	 // 1. 폼을 선택 - 폼의 이름을 불러준다.
+	 // 2. 폼 요소를 선택 - 폼.요소이름
+	 searchForm.pageNo.value  = '페이지 번호';
+	 
+	 // 3. 폼 전송하기 - form의 action속성에 정의된 url을 요청한다.
+	 // 폼안에 요소들을 파라미터로 서버에 전달
+	 searchForm.submit();
+	 
+ }
+
+<%--
+searchForm.searchField.options.length -> 옵션의 개수
+searchForm.searchField.options[0].value -> 첫번째 옵션 값
+searchForm.searchField.options[2].setAttribute("selected", "selected") -> 옵션
+searchForm.searchField.options -> 옵션 세부 사항
+searchForm.searchField.options[2].removeAttribute("selected", "selected") -> 옵션 제거하기 
+--%>
 </script>
 
 </head>
-<body class style="user-select: auto;">
-
-<script type="text/javascript">
-
-</script>
+<body>
 
 
 <!-- Button trigger modal -->
@@ -140,11 +193,15 @@ window.onload = function() {
 
 
 
-
-
-
-
-
+<!-- 페이지 넘버 변수 -->
+	<%
+		PageDTO pages = null;
+	if(request.getAttribute("page")!=null && !"".equals(request.getAttribute("page"))){
+		pages = (PageDTO) request.getAttribute("page");
+	} else{
+		pages = new PageDTO(0, new Criteria());
+	}
+%>
 
 
 
@@ -155,9 +212,13 @@ window.onload = function() {
 	세션에 user_id가 null이 아니라면 로그아웃 버튼
 	null이면 로그인
  -->
-	
+ 
+<%@ include file="Header.jsp" %>
+
+
 <div class="navbar" style="user-select: auto;">
-    <div class="navbar-inner" style="user-select: auto;">
+    
+<div class="navbar-inner" style="user-select: auto;">
       <div class="container" style="width: auto; user-select: auto;">
         <a class="navbar-brand" href="/session/ServletEX/Login.jsp" style="user-select: auto;">Board</a>
 		<form name="LoginForm">
@@ -170,32 +231,37 @@ window.onload = function() {
         </c:if>
       	</form>
       </div>
-    </div><!-- /navbar-inner -->
-      	<form class="d-flex" style="user-select: auto;">
-        <input class="form-control me-sm-2" type="search" placeholder="Search" style="user-select: auto;">
+    </div>    <!-- /navbar-inner -->
+    
+    <!-- 검색폼 : 테이블로 만들 수 있음-->
+    <!--  페이지 번호 같이 넣어주기!!!! -->
+    
+      	<form name = "searchForm" class="d-flex" style="user-select: auto;" action="/boardList">
+      	pageNo :<input type="text" name="pageNo" value="${param.pageNo }">
+      	num : <input type="text" name = "num">
+      	<select class="form-search me-sm-2" name = "searchField" id="exampleSelect1" style="user-select: auto;">
+        <option value="title" ${pages.criteria.searchField eq 'title' ? 'selected' : ''}>제목</option>
+        <option value="id" ${pages.criteria.searchField eq 'id' ? 'selected' : ''}>작성자</option>
+        <option value="content" ${pages.criteria.searchField eq 'content' ? 'selected' : ''}>내용</option>
+      	</select>
+      	
+        <input class="form-control me-sm-2" name = "searchWord" value = "${pages.criteria.searchWord}" type="search" placeholder="Search" style="user-select: auto;">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit" style="user-select: auto;">Search</button>
-      </form>
+        </form>
   </div>
 
-<br/>
-<br/>
 
-<!-- 페이지 넘버 변수 -->
-	<%
-		PageDTO pages = null;
-	if(request.getAttribute("page")!=null && !"".equals(request.getAttribute("page"))){
-		pages = (PageDTO) request.getAttribute("page");
-	} else{
-		pages = new PageDTO(0, new Criteria());
-	}
-%>
+
+
+
+
 
 
 <form>
 <div class="well">
 	<div class="header">
 	<H2 style="float: left;">Board</H2>
-	<c:if test="${empty dto }"  var="dto">
+	<c:if test="${not empty dto }"  var="dto">
 	<a href="/session/ServletEX/BoardWrite.jsp" style="float: right;"><button type="button" class="btn btn-info btn-xs" id="writebtn"><span class="glyphicon glyphicon-edit"></span>New</button></a>
 	</c:if>
 	</div>
@@ -205,6 +271,11 @@ window.onload = function() {
           ${boarddtovar.title } / ${boarddtovar.id }
           </c:forEach>
        --%>
+</form>
+
+ <%--
+ <table width = "90%" align ="center">
+  --%>
     <table class="table">
       <thead>
         <tr>
@@ -226,7 +297,7 @@ window.onload = function() {
       <c:forEach var="num" items="${boarddto}">
       	<tr>
                 <td>${num.num }</td>
-                <td><a href="/session/ServletEX/detail?num=${num.num }&pageNo=<%=pages.getCriteria().getPageNo()%>">${num.title }</a></td>
+                <td><a onclick="goDetail(${num.num})">${num.title }</a></td>
                 <%-- <td><a href="/session/ServletEX/detail?num=<%=num.getNum()%>&ids=<%=dto.getId()%>"><%=num.getTitle() %></a></td> --%>
                 <td>${num.id }</td>
 				<td>${num.postdate }</td>
@@ -306,24 +377,30 @@ window.onload = function() {
 
 
 
-</form>
+<!-- 
+
+href = "..." 링크로 이동할 경우, 검색어가 유지되지 않는다
+검색어를 유지하기 위해 searchForm을 전송하는 gopage함수를 생성하였다.
+
+ -->
 
 <div id = "pagination">
   <ul class="pagination justify-content-end" style="user-select: auto;">
     <li class="page-item <%= pages.isPrevious() ? "" : "disabled" %>" style="user-select: auto;">
-      <a class="page-link" href="/boardList?pageNo=<%=pages.getCriteria().getPageNo() - 1%>" style="user-select: auto;">&laquo;</a>
+      <a class="page-link" onclick="goPage(<%=pages.getCriteria().getPageNo() - 1%>)" style="user-select: auto;">&laquo;</a>
     </li>
     
     <%
     	for(int i = pages.getPage_startNo(); i <= pages.getPage_endNo(); i++){
     %>
-    <li class="page-item <%= pages.getCriteria().getPageNo() == i ? "active" : "" %>"" style="user-select: auto;">
-      <a class="page-link" href="/boardList?pageNo=<%=i%>" style="user-select: auto;"><%=i%></a>
+    <li class="page-item <%= pages.getCriteria().getPageNo() == i ? "active" : "" %> style="user-select: auto;">
+      <a class="page-link" onclick="goPage(<%=i %>)">
+      <%=i%></a>
     </li>
      <%} %>
     
     <li class="page-item <%= pages.isNext() ? "" : "disabled" %>">
-      <a class="page-link " href="/boardList?pageNo=<%=pages.getCriteria().getPageNo() + 1%>" style="user-select: auto;">&raquo;</a>
+      <a class="page-link " onclick="goPage(<%=pages.getCriteria().getPageNo() +1%>)" style="user-select: auto;">&raquo;</a>
     </li>
   </ul>
 </div>

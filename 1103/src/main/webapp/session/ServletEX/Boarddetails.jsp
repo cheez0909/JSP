@@ -121,7 +121,8 @@ window.onload = function(){
 	
 	listBtn.onclick = function(){
 		//location.href='/boardList';
-		history.back();
+		// history.back();
+		searchForm.submit();
 	};
 	
 	
@@ -170,10 +171,19 @@ window.onload = function(){
 </script>
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<%@ include file="Header.jsp" %>
+
+<form action="/boardList" name="searchForm">
+num : <input type="text" name="num" value="${param.num }"/>
+pageNo : <input type="text" name="pageNo" value="${param.pageNo }"/>
+searchWord : <input type="text" name="searchWord" value="${param.searchWord }"/>
+searchField : <input type="text" name="searchField" value="${param.searchField }"/>
+</form>
+
 
 <div class="card">
 		<button type="button" id="listBtn" class="btn btn-dark">리스트로 이동</button>
@@ -196,8 +206,6 @@ window.onload = function(){
 					out.print("(┬┬﹏┬┬)");
 				}		
 %>
-
-
 		<span>
             <ul>
                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>

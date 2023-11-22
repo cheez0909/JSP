@@ -22,12 +22,23 @@ public class boardListController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
+		System.out.println(request.getParameter("searchField"));
+		System.out.println(request.getParameter("searchWord"));
 				// 리스트 조회 후 리퀘스트 영역에 저장
 				BoardDAO dao = new BoardDAO();
-				
+				System.out.println(request.getParameter("pageNO"));
 				
 				// 리스트 조회하기 위한 파라미터 수집
-				Criteria criteria = new Criteria(request.getParameter("pageNo"), request.getParameter("amount"));
+				Criteria criteria = new Criteria(request.getParameter("pageNo"),
+						request.getParameter("amount"), 
+						request.getParameter("searchField"), 
+						request.getParameter("searchWord"));
+				
+				System.out.println(criteria.getSearchField());
+				System.out.println(criteria.getSearchWord());
+				System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+				
+				
 				PageDTO page = new PageDTO(dao.getTotalCnt(), criteria);
 				request.setAttribute("boarddto", dao.getList(criteria));
 				
@@ -39,6 +50,8 @@ public class boardListController extends HttpServlet {
 				// System.out.println(dao.getTotalCnt());
 				
 				dao.close();
+				
+				
 				// 페이지 전환 forward방식으로 전환하므로 request영역이 공유됨
 				request.getRequestDispatcher("/session/ServletEX/Board.jsp").forward(request, response);
 	}
@@ -50,7 +63,8 @@ public class boardListController extends HttpServlet {
 		BoardDAO dao = new BoardDAO();
 		
 		// 리스트 조회하기 위한 파라미터 수집
-		Criteria criteria = new Criteria("1", "10");
+		Criteria criteria = new Criteria("1", "10", request.getParameter("searchField"), 
+				request.getParameter("searchWord"));
 		PageDTO page = new PageDTO(dao.getTotalCnt(), criteria);
 		request.setAttribute("boarddto", dao.getList(criteria));
 		

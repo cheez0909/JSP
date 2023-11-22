@@ -59,6 +59,15 @@ public class BoardDAO extends DBConnection{
 		List<BoardDTO> list = new ArrayList<>();
 //		String sql = "SELECT *\r\n"
 //				+ "FROM BOARD\r\n";
+		try {
+		
+			String where="";
+			
+			// 컬럼명은 ? 로 동작되지 않음
+			if(!"".equals(cri.getSearchField())&&!"".equals(cri.getSearchWord()) ) {
+				where = "where " + cri.getSearchField() + " like '%" + cri.getSearchWord()
+					+ "%' ";
+			}
 		
 		// 페이징 처리하기
 		String sql = "select *\r\n"
@@ -66,10 +75,10 @@ public class BoardDAO extends DBConnection{
 				+ "        from  (  -- 최신순으로 조회\r\n"
 				+ "                select *\r\n"
 				+ "                from board\r\n"
+				+ where
 				+ "                order by num desc) b\r\n"
 				+ "        )\r\n"
 				+ "where rnum between ? and ?";
-		try {
 		
 			pstmt = con.prepareStatement(sql);
 			// 시작번호 = 끝번호 - (페이지당게시물수 -1)
@@ -81,6 +90,9 @@ public class BoardDAO extends DBConnection{
 			// 페이지 
 			
 			rs = pstmt.executeQuery();
+			
+			System.out.println(sql);
+			System.out.println(where);
 			
 			while(rs.next()) {
 				BoardDTO dto = new BoardDTO();
@@ -237,6 +249,47 @@ public class BoardDAO extends DBConnection{
 		return res;
 	}
 	
+	/*
+	 * 검색 조건을 적용했을때 페이지 블럭이
+	 * 해당 검색 조건을 만족하는 만큼만 나와야 하는데
+	 * 매개변수가 없을 경우 총 게시물수로 고정되어 출력됨
+	 * 게시글의 총 건수를 조회 후 반환
+	 * return 게시글의 총 건수
+	 * 
+	 */
+//	public int getTotalCnt(Criteria criteria) {
+//		int res = 0;
+//		String where="";
+//		
+//		
+//		try {
+//			
+//			// 컬럼명은 ? 로 동작되지 않음
+//			if(!"".equals(criteria.getSearchField())&&!"".equals(criteria.getSearchWord()) ) {
+//				where = "where " + criteria.getSearchField() + " like '%" + criteria.getSearchWord()
+//					+ "%' ";
+//			}
+//			
+//			String sql = "select count(*)\r\n"
+//					+ "from board " + where;
+//			
+//			pstmt = con.prepareStatement(sql);
+//			//rs = stmtl.executeQuery(sql);
+//			rs = pstmt.executeQuery();
+//			
+//			if(rs.next()) {
+//				res = rs.getInt(1);
+//				//System.out.println(res);
+//			}
+//			
+//			System.out.println(res);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return res;
+//	}
+	
 	
 	//public static void main(String[] args) {
 	//	BoardDAO dao = new BoardDAO();
@@ -246,4 +299,34 @@ public class BoardDAO extends DBConnection{
 	//		i++;
 	//	}
 	//}
+	
+	
+	
+	/*
+	 * 검색 메서드
+	 * 
+	 */
+	
+	public int search(String title, String content, String id) {
+		BoardDTO dto = new BoardDTO();
+		
+		int res=0;
+		try {
+			
+		String sql = "insert into board (num, title, content, id) \r\n"
+				+ "values (SEQ_BOARD_NUM.NEXTVAL, ?, ?, ?)";
+		
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, title);
+		pstmt.setString(2, content);
+		pstmt.setString(3, id);
+		res = pstmt.executeUpdate();
+		
+		System.out.println(res + "건이 실행되었습니다.");
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	return res;
+	}
+	
 }

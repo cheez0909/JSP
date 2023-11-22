@@ -2,6 +2,7 @@
 <modules>
   <module moduleId="org.eclipse.jst.jee.server:1113" serverId="hello"/>
   <module moduleId="org.eclipse.jst.jee.server:helloJsp" serverId="hello"/>
+  <module moduleId="org.eclipse.jst.jee.server:library" serverId="hello"/>
   <module moduleId="org.eclipse.jst.jee.server:1103" serverId="hello"/>
   <module moduleId="org.eclipse.jst.jee.server:1114" serverId="login"/>
   <module moduleId="org.eclipse.jst.jee.server:hello" serverId="hello"/>
