@@ -3,7 +3,6 @@ package com.momo.dto;
 public class PageDTO {
 
 	// 페이지네이션을 그리기 위해 필요한 정보
-	
 	int page_startNo;
 	int page_endNo;
 	

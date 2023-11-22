@@ -12,13 +12,31 @@ list-style: none;
 </style>
 </head>
 <body>
+
 <script type="text/javascript">
+window.onload = function() {
+	
+	let addbtn = document.querySelector("#addbtn");
+	
+	if(addbtn!=null){
+		addbtn.addEventListener('click', function(){
+			alert('등록합니당~(❁´◡`❁)(❁´◡`❁)');
+	});
+};
+};
+
 </script>
+
 <form action="/addList" method="post">
 <ul>
 <li>No : <input type="text" name="no"></li>
 <li>TITLE : <input type="text" name="title"></li>
-<li>RENTYN : <input type="text" name="yn"></li>
+<li>RENTYN :
+<select name="yn">
+<option value="Y">Y</option>
+<option value="N">N</option>
+</select>
+</li>
 <li>AUTHOR : <input type="text" name="author"></li>
 <li><button type="submit" id="addbtn" >등록</button></li>
 </ul>

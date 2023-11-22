@@ -8,31 +8,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import library.dao.libraryDAO;
-import library.dto.Criteria;
+import library.dto.libraryDTO;
 
-@WebServlet("/library")
-public class libraryController extends HttpServlet {
-	
+
+@WebServlet("/detail")
+public class detailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		libraryDAO dao = new libraryDAO();
 		
-		request.setAttribute("list", dao.getList(new Criteria()));
-		
+		libraryDTO dto = dao.getList(Integer.parseInt(request.getParameter("No")));
+		request.setAttribute("dto", dto);
 		dao.close();
-		
-		request.getRequestDispatcher("/lib/bookList.jsp").forward(request, response);
+		request.getRequestDispatcher("/lib/bookdetail.jsp").forward(request, response);
 	}
-
-	
-	// 로그인 할 때
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		
-		
-		
-	
-	
 	}
+
 }

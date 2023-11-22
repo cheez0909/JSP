@@ -36,10 +36,10 @@ public class Main extends DBConnection{
 	
 	public static void main(String[] args) {
 		Main test = new Main();
-		for(int i=8; i<=100; i++) {
+		for(int i=101; i<=200; i++) {
 			Random random = new Random();
-			int a = random.nextInt(100);
-			int b = random.nextInt(0, 1);
+			int a = random.nextInt(100, 200);
+			int b = random.nextInt(0, 2);
 			String[] str = {"Y", "N"};
 			test.insert(i, "책"+a, str[b], "작가"+a);
 		}
