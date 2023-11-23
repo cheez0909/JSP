@@ -16,6 +16,9 @@ public class addListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		libraryDAO dao = new libraryDAO();
+		request.setAttribute("no", dao.noMax());
+		request.getRequestDispatcher("/lib/bookadd.jsp").forward(request, response);	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,7 +32,7 @@ public class addListController extends HttpServlet {
 				request.getParameter("yn"), 
 				request.getParameter("author"));
 		if(rs!=1) {
-			
+			request.getRequestDispatcher("/lib/bookadd.jsp?err=1").forward(request, response);
 		}else {
 		response.sendRedirect("/library");
 		}

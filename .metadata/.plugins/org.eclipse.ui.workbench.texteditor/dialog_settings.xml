@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="작성"/>
+		<item key="selection" value="Register"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="작성"/>
-			<item value="listBtn"/>
-			<item value="auto"/>
+			<item value="register"/>
+			<item value="&quot;../js"/>
+			<item value="&quot;js/"/>
+			<item value="js/"/>
+			<item value="../vendor"/>
+			<item value="cardsha"/>
+			<item value="card"/>
+			<item value="datatable"/>
+			<item value="table"/>
+			<item value="logout_button"/>
+			<item value="logout_button."/>
+			<item value="searchForm"/>
+			<item value="god"/>
+			<item value="delete"/>
 			<item value="deletebtn"/>
-			<item value="login_button"/>
-			<item value="position"/>
-			<item value="SetCharacterEncoding"/>
 		</list>
 		<list key="replacehistory">
+			<item value="&quot;../js/"/>
+			<item value="&quot;../js"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="605"/>
-		<item key="DIALOG_Y_ORIGIN" value="422"/>
+		<item key="DIALOG_X_ORIGIN" value="759"/>
+		<item key="DIALOG_Y_ORIGIN" value="367"/>
 		<item key="DIALOG_WIDTH" value="322"/>
-		<item key="DIALOG_HEIGHT" value="391"/>
+		<item key="DIALOG_HEIGHT" value="292"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 	</section>
 </section>

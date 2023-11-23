@@ -22,18 +22,44 @@ window.onload=function(){
 			history.back();
 		});
 	};
+	
+	let modifybtn = document.querySelector("#modifybtn");
+	if(modifybtn!=null){
+		modifybtn.addEventListener('click', ()=> {
+			alert('클릭')
+			detail.action="/lib/ModifyBook.jsp?pageNo="+${param.pageNo };
+		});
+	};
+	
 };
+
+
+/*
+ * 	스크립트에서 함수를 정의하는 방법
+ 	function 함수명(파람1, 파람2, ... ){
+	
+	}
+	
+	함수의 호출
+	함수명(파람1, 파람2, ...);
+ */
+ 
+
+ 
+ 
+ 
+ 
 </script>
 <ul>
 <c:if test="${not empty dto }">
-<form action="" method="post">
-<li>NO : ${dto.no }</li>
-<li>제목 : ${dto.title }</li>
-<li>대여여부 : ${dto.rentyn }</li>
-<li>작가 : ${dto.author }</li>
-<li><button type="button" id="backbtn">뒤로가기</button></li>
+<form name="detail" method="post">
+<li>NO : ${dto.no }<input type="hidden" name="No" value="${dto.no }" /></li>
+<li>제목 : ${dto.title }<input type="hidden" name="Title" value="${dto.title }" /></li>
+<li>대여여부 : ${dto.rentyn }<input type="hidden" name="YN" value="${dto.rentyn }" /></li>
+<li>작가 : ${dto.author }<input type="hidden" name="Author" value="${dto.author }" /></li>
 <li><button type="submit" id="modifybtn">수정하기</button></li>
 </form>
+<li><button type="button" id="backbtn">뒤로가기</button></li>
 </c:if>
 </ul>
 </body>

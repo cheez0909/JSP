@@ -16,13 +16,38 @@ public class libraryDAO extends DBConnectionPool{
 	public List<libraryDTO> getList(Criteria criteria) {
 		
 		List<libraryDTO> list = new ArrayList<>();
-		String sql ="select *\r\n"
-				+ "from book";
+		
 		try {
-			stmtl = con.createStatement();
-			rs = stmtl.executeQuery(sql);
+			String where ="";
+			if(!"".equals(criteria.getSearchField()) &&
+					!"".equals(criteria.getSearchWord())) {
+				
+				where = "where " + criteria.getSearchField() + " like '%"
+						+ criteria.getSearchWord() + "%'";
+				
+			}
+			String sql ="select *\r\n"
+					+ "from (select rownum rowno, b.*\r\n"
+					+ "from (select *\r\n"
+					+ "from book\r\n"
+					+ where
+					+ "order by no desc) b)\r\n"
+					+ "where rowno between ? and ?";
+			
+			/*
+			 * 서브쿼리를 나눠서 before, sql, after로 나눠서 할 수도 있다.
+			 * */
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, criteria.getStartNo());
+			pstmt.setInt(2, criteria.getEndNo());
+			
+			rs =  pstmt.executeQuery();
+			
 			while(rs.next()) {
 				libraryDTO dto = new libraryDTO();
+				dto.setRowno(rs.getString("ROWNO"));
 				dto.setNo(rs.getString("NO"));
 				dto.setTitle(rs.getString("TITLE"));
 				dto.setRentyn(rs.getString("RENTYN"));
@@ -86,19 +111,33 @@ public class libraryDAO extends DBConnectionPool{
 	}
 	
 	// 총 게시물 수
-	public int getTotalCnt() {
+	public int getTotalCnt(Criteria criteria) {
 		int res = 0;
-		String sql = "select count(*)\r\n"
-				+ "from book";
 		
 		try {
+			
+			String where ="";
+			if(!"".equals(criteria.getSearchField()) &&
+					!"".equals(criteria.getSearchWord())) {
+				
+				where = " where " + criteria.getSearchField() + " like '%"
+						+ criteria.getSearchWord() + "%'";
+				
+			}
+			
+			String sql = "select count(*)\r\n"
+					+ "from book" 
+					+ where;
+			
+			System.out.println("Sql" + sql);
+			
 			pstmt = con.prepareStatement(sql);
 			//rs = stmtl.executeQuery(sql);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				res = rs.getInt(1);
-				//System.out.println(res);
+				System.out.println("게시물수 " + res);
 			}
 			
 			System.out.println(res);
@@ -109,4 +148,67 @@ public class libraryDAO extends DBConnectionPool{
 		return res;
 	}
 	
+	/*
+	 * 
+	 * 쿼리를 붙여 만드는 메서드 만들기
+	 * 
+	 */
+	/*
+	String pageingQuery(String sql) {
+		String before = "select * from";
+		String sql = "select * from";
+		String after = "select * from";
+		return before + sql + after;
+	}
+	*/
+	
+	// 수정하기 메서드 만들기
+	public int modify(String title, String rentyn, String author, String no) {
+		String sql = "update book set \r\n"
+				+ "title=?\r\n"
+				+ ", rentyn=?\r\n"
+				+ ", author=?\r\n"
+				+ "where no = ?";
+		int res = 0;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, rentyn);
+			pstmt.setString(3, author);
+			pstmt.setString(4, no);
+			res = pstmt.executeUpdate();
+			return res;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+		return res;
+	}
+	
+	// No 카운트 하기
+	public String noMax() {
+		String res = "";
+		try {
+		String sql = "select max(no)\r\n"
+				+ "from book";
+				
+		pstmt = con.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			res = rs.getString(1);
+		}		
+		return res;
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+		return res;	
+	}
 }

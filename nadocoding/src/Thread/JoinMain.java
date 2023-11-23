@@ -12,7 +12,7 @@ public class JoinMain {
 		thr.start();
 		
 		try {
-			thr.join(100);
+			thr.join(100); // 0.1초 대기
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

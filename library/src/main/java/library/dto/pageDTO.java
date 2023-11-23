@@ -19,7 +19,7 @@ public class pageDTO {
 	int totalCnt;
 	Criteria critera;
 	// 보여줄 페이지 블럭의 수
-	int page_blockAmount = 10;
+	int page_blockAmount = 5;
 
 	public pageDTO(int totalCnt,
 			Criteria criteria, String page_blockAmount) {
@@ -43,8 +43,19 @@ public class pageDTO {
 		
 		page_lastNo = page_lastNo > page_endNo ? page_endNo : page_lastNo;
 		
+		if(page_lastNo<=page_firstNo) {
+			page_lastNo = page_firstNo;
+		}
+		
+		if(page_endNo<=page_firstNo) {
+			page_endNo = page_firstNo;
+		}
+		
 		pre = criteria.getPageNo() == 1 ? false : true;
 		next = criteria.getPageNo() == page_endNo ? false : true;
+		
+	
+		
 		
 		System.out.println("page_firstNo " + page_firstNo);
 		System.out.println("page_lastNo " + page_lastNo);
@@ -60,6 +71,14 @@ public class pageDTO {
 		
 	}
 	
+
+	@Override
+	public String toString() {
+		return "pageDTO [page_firstNo=" + page_firstNo + ", page_lastNo=" + page_lastNo + ", page_endNo=" + page_endNo
+				+ ", pre=" + pre + ", next=" + next + ", totalCnt=" + totalCnt + ", critera=" + critera
+				+ ", page_blockAmount=" + page_blockAmount + "]";
+	}
+
 
 	public int getPage_firstNo() {
 		return page_firstNo;

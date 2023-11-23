@@ -3,32 +3,80 @@ package library.dto;
 public class Criteria {
 
 	// 현재 페이지 번호
-	private int pageNo = 1;
+	private int pageNo;
 	
 	// 한페이지당 보여줄 게시물 수
-	private int amount =10;
+	private int amount;
 	
 	// 현재 페이지 게시물의 시작번호
 	private int startNo;
 	
 	// 현재 페이지 게시물의 끝번호
 	private int endNo;
+	
+	private String searchField;
+	private String searchWord;
+	
+	
+
+	public String getSearchField() {
+		return searchField;
+	}
+
+	public void setSearchField(String searchField) {
+		this.searchField = searchField;
+	}
+
+	public String getSearchWord() {
+		return searchWord;
+	}
+
+	public void setSearchWord(String searchWord) {
+		this.searchWord = searchWord;
+	}
 
 	public Criteria() {
 		endNo = pageNo * amount;
 		startNo = endNo - (amount - 1);
 	}
 	
-	public Criteria(String pageNo, String amount) {
-		if(pageNo != null && "".equals(pageNo)) {
+	@Override
+	public String toString() {
+		return "Criteria [pageNo=" + pageNo + ", amount=" + amount + ", startNo=" + startNo + ", endNo=" + endNo
+				+ ", searchField=" + searchField + ", searchWord=" + searchWord + "]";
+	}
+
+	public Criteria(String pageNo, String amount, String searchField, String searchWord) {
+		if(pageNo != null && !"".equals(pageNo)) {
 			this.pageNo = Integer.parseInt(pageNo);
 			}
+			else {
+				this.pageNo = 1;
+			}
 		
-		if(amount != null && "".equals(amount)) {
+		if(amount != null && !"".equals(amount)) {
 			this.amount = Integer.parseInt(amount);
+		} else {
+			this.amount = 10;
 		}
+		
 		endNo = this.pageNo * this.amount;
 		startNo = endNo - (this.amount - 1);
+		
+		if(searchField != null && !"".equals(searchField)) {
+			this.searchField = searchField;
+			}
+			else {
+				this.searchField = "";
+			}
+		
+		if(searchWord != null && !"".equals(searchWord)) {
+			this.searchWord = searchWord;
+			}
+			else {
+				this.searchWord = "";
+			}
+		
 	}
 
 	public int getPageNo() {

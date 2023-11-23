@@ -6,7 +6,14 @@ public class libraryDTO {
 	private String title;
 	private String rentyn;
 	private String author;
+	private String rowno;
 	
+	public String getRowno() {
+		return rowno;
+	}
+	public void setRowno(String rowno) {
+		this.rowno = rowno;
+	}
 	public String getNo() {
 		return no;
 	}
@@ -23,7 +30,7 @@ public class libraryDTO {
 		return rentyn;
 	}
 	public void setRentyn(String rentyn) {
-		this.rentyn = rentyn;
+		this.rentyn = rentyn.equals("Y") ? "대여중" : "대여가능";
 	}
 	public String getAuthor() {
 		return author;
