@@ -43,7 +43,7 @@
 		<%
 		String display = "";
 		if("Y".equals(CookieManager.getCookieValue(request, "popupClose"))){
-		%>	
+		%>
 		 document.querySelector("#popup").style.display = '<%=display%>';
 		 <%}
 		 else{%>

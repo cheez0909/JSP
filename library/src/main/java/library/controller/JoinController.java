@@ -14,14 +14,19 @@ import org.apache.jasper.tagplugins.jstl.core.Out;
 import library.dao.MemberDAO;
 
 
-@WebServlet("/Login")
-public class LoginController extends HttpServlet {
+@WebServlet("/Join")
+public class JoinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		out.append("post방식으로 요청해주세요!");
 	}
 
 	
@@ -40,10 +45,10 @@ public class LoginController extends HttpServlet {
 			int rs = dao.join(request.getParameter("id"), request.getParameter("pw"), request.getParameter("name"), request.getParameter("email"));
 			if(rs!=1) {
 		
-				request.getRequestDispatcher("Login.jsp?err=1").forward(request, response);
+				request.getRequestDispatcher("Join.jsp?err=1").forward(request, response);
 			} else {
 
-				response.sendRedirect("Login.jsp?err=3");
+				response.sendRedirect("Join.jsp?err=3");
 			}
 		} else {
 			response.setCharacterEncoding("UTF-8");
@@ -53,7 +58,7 @@ public class LoginController extends HttpServlet {
 			out.print("alert('비밀번호를 확인해주세요');");
 			out.print("history.back();");
 			out.print("</script>");
-			// request.getRequestDispatcher("Login.jsp?err=2").forward(request, response);
+			// request.getRequestDispatcher("Join.jsp?err=2").forward(request, response);
 		}
 		
 		dao.close();

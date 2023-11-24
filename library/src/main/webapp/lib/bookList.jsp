@@ -7,16 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="../5/simplex/bootstrap.css" style="user-select: auto;">
-<link rel="stylesheet" href="../_vendor/bootstrap-icons/font/bootstrap-icons.min.css" style="user-select: auto;">
-<link rel="stylesheet" href="../_vendor/prismjs/themes/prism-okaidia.css" style="user-select: auto;">
-<link rel="stylesheet" href="../_assets/css/custom.min.css" style="user-select: auto;">
+<link rel="stylesheet" href="../bootstrap.min.css" style="user-select: auto;">
+<link rel="stylesheet" href="../bootstrap.css" style="user-select: auto;">
 
 
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KGDJBEFF3W" style="user-select: auto;"></script>
+<script src="../bootstrap.min.css" style="user-select: auto;"></script>
 <title>Insert title here</title>
 
 <style type="text/css">
@@ -27,7 +22,7 @@
 
 
 </head>
-<body>
+<body style="width: 80%; margin: 0 auto; align: center;">
 <script type="text/javascript">
 window.onload = function() {
 	alert("로그아웃합니다.");
@@ -67,135 +62,86 @@ function gopage(go){
 
 
 </script>
+
+
 <!-- header 외부 파일 인클루드 -->
 <%@ include file = "common/Header.jsp" %>
 
 
+
+
 <!-- 검색하기 -->
-<form action="/library">
-<input type="text" name="searchWord">
-<select name="searchField">
-<option value="title">책제목</option>
-<option value="author">작가</option>
-</select>
-<button type="submit" id="searchBtn">검색</button>
-</form>
-
-<!-- 추가하기 버튼 / 스크립트로 작동함 -->
-<input type="button" name="addListbtns" id="addListbtn" value="추가하기">
-
-<!-- 도서 목록 출력 -->
-<table>
-<thead>
-<tr>
-<th>No</th>
-<th>TITLE</th>
-<th>RENTYN</th>
-<th>AUTHOR</th>
-</tr>
-</thead>
-
-<c:if test="${not empty list }">
-<c:forEach var="bookList" items="${list}">
-<form>
-<tr>
-<td>${bookList.no }</td>
-<c:if test="${empty param.pageNo}">
-<td><a class = "pointer" onclick="view(${bookList.no}, 1)" >${bookList.title }</a></td>
-</c:if>
-<c:if test="${not empty param.pageNo}">
-<td><a class = "pointer" onclick="view(${bookList.no}, ${param.pageNo })" >${bookList.title }</a></td>
-</c:if>
-<td>${bookList.rentyn }</td>
-<td>${bookList.author }</td>
-</tr>
-</form>
-</c:forEach>
-</c:if>
-
-<%
-	pageDTO dto = null;
-	if(request.getAttribute("page")!=null){
-		
-		dto = (pageDTO) request.getAttribute("page");
-	}else{
-		dto = new pageDTO(0, new Criteria());
-	}
-%>
-<tr>
-<td colspan="4">
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item ${page.pre ? 'active' : 'disabled'}">
-      <a class="page-link" onclick="gopage(${page.critera.pageNo -1})">Previous</a>
-    </li>
-    
-	<%for(int i=dto.getPage_firstNo(); i<=dto.getPage_lastNo(); i++) {
-		String curr = i == dto.getCritera().getPageNo() ? "active" : "";
-	%>
-    <li class="page-item <%=curr%>"><a class="page-link" href="/library?pageNo=<%=i%>"><%=i %></a>
-    </li>
-    <%} %>
-    
-    <%String next = dto.isNext() ? "active" : "disabled";%>
-    <li class="page-item <%=next%>">
-      <a class="page-link" href="/library?pageNo=<%=dto.getCritera().getPageNo() + 1%>">Next</a>
-    </li>
-    
-  </ul>
-</nav>
-</td>
-</tr>
-
-</table>
-
-<div class="card bg-light mb-3" style="width : 70%; ">
+<div class="card bg-secondary mb-3">
   <div class="card-header" style="user-select: auto;">
   <h6>게시판입니당.
   </h6>
   </div>
-  <div class="card-body" style="user-select: auto;">
-  <div class="table-responsive">
-  		<div style=" float : left; ">
-    	<input class="form-control" id="readOnlyInput" type="text" placeholder="Readonly input here..." style=" float : left; ">
-      <select class="form-select" id="exampleSelect1" style="float : right; ">
-        <option style="user-select: auto;">1</option>
-        <option style="user-select: auto;">2</option>
-        <option style="user-select: auto;">3</option>
-        <option style="user-select: auto;">4</option>
-        <option style="user-select: auto;">5</option>
-      </select>
-     </div>
-  </div>
+  
+
+	<div class="card-body" style="user-select: auto;">
+		<form action="/library" class="table-responsive" style="display:inline-block;">
+ 			<div class="form-group" style="user-select: auto;">
+				<div class="input-group mb-3" style="user-select: auto;">
+     				<select class="form-select" name="searchField" id="exampleSelect1" >
+       				<option value="title">책제목</option>
+       				<option value="author">작가</option>
+    				</select>
+					<input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"  aria-describedby="button-addon2" name="searchWord">
+					<button class="btn btn-outline-primary" type="submit" id="searchBtn" style="user-select: auto;">검색</button>
+     			</div>
+			</div>
+ 		</form>
+  	
+		<!-- 추가하기 버튼 / 스크립트로 작동함 -->
+		<input type="button" class="btn btn-outline-info" name="addListbtns" id="addListbtn" value="추가하기" style="float:right">
       
-  <table class="table table-hover" >
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Column heading</th>
-      <th>Column heading</th>
-      <th>Column heading</th>
-    </tr>
-  </thead>
-  <tbody>
-  <tr class="table-primary" style="user-select: auto;">
-      <th >Primary</th>
-      <td >Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-   </tr>
-  </tbody>
-</table>
-  </div>
+  		<!-- 도서 목록 출력 -->
+  		<table class="table table-hover" >
+  		<thead>
+    		<tr class="table-primary">
+      			<th>No</th>
+				<th>TITLE</th>
+				<th>RENTYN</th>
+				<th>AUTHOR</th>
+    		</tr>
+  		</thead>
+  
+
+		<tbody>
+			<c:if test="${not empty list }">
+			<c:forEach var="bookList" items="${list}">
+			<form>
+			<tr>
+				<td>${bookList.no }</td>
+				<c:if test="${empty param.pageNo}">
+					<td><a class = "pointer" onclick="view(${bookList.no}, 1)" >${bookList.title }</a></td>
+				</c:if>
+				<c:if test="${not empty param.pageNo}">
+					<td><a class = "pointer" onclick="view(${bookList.no}, ${param.pageNo })" >${bookList.title }</a></td>
+				</c:if>
+				<td>${bookList.rentyn }</td>
+				<td>${bookList.author }</td>
+			</tr>
+			</form>
+			</c:forEach>
+			</c:if>
+		</tbody>
+
+		<tfoot>
+			<%@ include file = "Navigation.jsp" %>
+		</tfoot>
+		</table>
+	</div>
 </div>
+
+
+
+
 
 
 
 <!-- footer 외부 파일 인클루드 -->
 <%@ include file = "common/Footer.jsp" %>
 
-<script src="../_assets/js/custom.js" style="user-select: auto;"></script>
- <script src="../_vendor/prismjs/prism.js" data-manual="" style="user-select: auto;"></script>   
-<script src="../_vendor/bootstrap/dist/js/bootstrap.bundle.min.js" style="user-select: auto;"></script>
 </body>
 </html>
