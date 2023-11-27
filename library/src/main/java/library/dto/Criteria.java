@@ -14,6 +14,8 @@ public class Criteria {
 	// 현재 페이지 게시물의 끝번호
 	private int endNo;
 	
+	
+	
 	private String searchField;
 	private String searchWord;
 	

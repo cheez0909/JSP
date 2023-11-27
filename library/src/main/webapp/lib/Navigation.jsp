@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,6 @@
 	3. searchForm을 생성
 		pageNo요소가 있어야함
  -->
- 
  
 <%
 	pageDTO dto = null;

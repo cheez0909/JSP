@@ -12,7 +12,9 @@ import library.dto.libraryDTO;
 
 
 @WebServlet("/detail")
+
 public class detailController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
 
@@ -24,8 +26,8 @@ public class detailController extends HttpServlet {
 		dao.close();
 		request.getRequestDispatcher("/lib/bookdetail.jsp").forward(request, response);
 	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	}
-
 }

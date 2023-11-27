@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="../bootstrap.css" style="user-select: auto;">
 
 
-<script src="../bootstrap.min.css" style="user-select: auto;"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <title>Insert title here</title>
 
 <style type="text/css">
@@ -131,6 +131,8 @@ function gopage(go){
 			<%@ include file = "Navigation.jsp" %>
 		</tfoot>
 		</table>
+		
+		<img src="../table/망곰이.jpg">
 	</div>
 </div>
 

@@ -27,13 +27,13 @@ public class addListController extends HttpServlet {
 //		System.out.println(request.getParameter("rentyn"));
 //		System.out.println(request.getParameter("author"));
 		libraryDAO dao = new libraryDAO();
-		int rs = dao.insert(Integer.parseInt(request.getParameter("no")), 
-				request.getParameter("title"), 
+		int rs = dao.insert( request.getParameter("title"), 
 				request.getParameter("yn"), 
 				request.getParameter("author"));
 		if(rs!=1) {
 			request.getRequestDispatcher("/lib/bookadd.jsp?err=1").forward(request, response);
 		}else {
+		// 메세지 박스 활용해보기
 		response.sendRedirect("/library");
 		}
 	}

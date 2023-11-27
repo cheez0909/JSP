@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="searchBtn"/>
+		<item key="selection" value="mangom"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="mangom"/>
+			<item value="col-lg-5"/>
+			<item value="d-none"/>
+			<item value="d-lg-block"/>
+			<item value="600x800"/>
+			<item value="망곰"/>
+			<item value="insert"/>
+			<item value="선택"/>
+			<item value="파일"/>
+			<item value="image"/>
+			<item value="bg-register-image"/>
+			<item value="bg-register-mangom"/>
+			<item value=".bg-register-mangom"/>
+			<item value="man"/>
 			<item value="searchBtn"/>
-			<item value="Login"/>
-			<item value="joinBtn"/>
-			<item value="register"/>
-			<item value="&quot;../js"/>
-			<item value="&quot;js/"/>
-			<item value="js/"/>
-			<item value="../vendor"/>
-			<item value="cardsha"/>
-			<item value="card"/>
-			<item value="datatable"/>
-			<item value="table"/>
-			<item value="logout_button"/>
-			<item value="logout_button."/>
-			<item value="searchForm"/>
 		</list>
 		<list key="replacehistory">
 			<item value="&quot;../js/"/>

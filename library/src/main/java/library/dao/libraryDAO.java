@@ -62,15 +62,16 @@ public class libraryDAO extends DBConnectionPool{
 	}
 	
 	// 추가하는 메서드 만들기
-	public int insert(int i, String title, String yn, String Author) {
-		String sql = "insert into book values (?, ?, ?, ?)";
+	public int insert(String title, String yn, String Author) {
+		String sql = "insert into book values (seq_book_no.NEXTVAL, ?, ?, ?)";
 		int res = 0;
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, i);
-			pstmt.setString(2, title);
-			pstmt.setString(3, yn);
-			pstmt.setString(4, Author);
+			pstmt.setString(1, title);
+			pstmt.setString(2, yn);
+			pstmt.setString(3, Author);
+			
+			
 			res = pstmt.executeUpdate();
 			return res;
 		} catch (SQLException e) {
