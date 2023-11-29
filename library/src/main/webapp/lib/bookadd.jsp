@@ -55,7 +55,7 @@ window.onload = function() {
 	<div class="card-body" style="user-select: auto;">
 	
 	
-<form action="/addList" method="post">
+<form action="/uploadProcess" method="post" enctype="multipart/form-data">
 <div class="form-group" style="user-select: auto;">
   <div class="form-group" style="user-select: auto;">
     <div class="input-group mb-3" style="user-select: auto;">
@@ -82,7 +82,7 @@ window.onload = function() {
     
     <div class="input-group mb-3 w-15" style="user-select: auto;">
     <span class="input-group-text w-15" style="user-select: auto;">파일첨부</span>
-      <input class="form-control w-15" type="file" id="formFile" style="user-select: auto;">
+      <input class="form-control w-15" type="file" id="formFile" style="user-select: auto;" name="formFile">
     </div>
     
     <div class="input-group" style="user-select: auto;">

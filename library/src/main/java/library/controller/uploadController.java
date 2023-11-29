@@ -127,8 +127,8 @@ public class uploadController extends HttpServlet {
 		
 		dao.close();
 		
-		request.getRequestDispatcher("/lib/msgbox.jsp").forward(request, response);
-		// response.sendRedirect("/upload");
+		// request.getRequestDispatcher("/lib/msgbox.jsp").forward(request, response);
+		response.sendRedirect("/upload");
 	}
 
 }

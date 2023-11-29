@@ -1,24 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.Exception"/>
-    <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="com.repository.MemberRepository"/>
-    <fullyQualifiedTypeName name="javax.sound.midi.Sequence"/>
-    <fullyQualifiedTypeName name="com.repository.MemoryMemberRepository"/>
-    <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
-    <fullyQualifiedTypeName name="com.domain.Member"/>
-    <fullyQualifiedTypeName name="com.momo.dto.PageDTO"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
-    <fullyQualifiedTypeName name="com.momo.el.MyELClass"/>
-    <fullyQualifiedTypeName name="generics.coffe.CoffeById"/>
-    <fullyQualifiedTypeName name="generics.CoffeMain"/>
-    <fullyQualifiedTypeName name="generics.coffe.CoffeByName"/>
-    <fullyQualifiedTypeName name="generics.coffe.CoffeeByReady"/>
-    <fullyQualifiedTypeName name="generics.coffe.CoffeByGenerics"/>
-    <fullyQualifiedTypeName name="generics.coffee.CoffeeVipUser"/>
-    <fullyQualifiedTypeName name="generics.coffee.CoffeeByUsersGenerics"/>
-    <fullyQualifiedTypeName name="generics.coffee.CoffeeUser"/>
-    <fullyQualifiedTypeName name="java.lang.Character"/>
     <fullyQualifiedTypeName name="Wrapper.ArrayListMain"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
@@ -54,10 +35,29 @@
     <fullyQualifiedTypeName name="Thread.wrapper"/>
     <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="library.util.DBConnectionPool"/>
-    <fullyQualifiedTypeName name="javax.security.auth.message.callback.PrivateKeyCallback.Request"/>
     <fullyQualifiedTypeName name="org.apache.jasper.tagplugins.jstl.core.Out"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="library.dao.MemberDAO"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
+    <fullyQualifiedTypeName name="org.springframework.context.annotation.Scope"/>
+    <fullyQualifiedTypeName name="jakarta.annotation.PostConstruct"/>
+    <fullyQualifiedTypeName name="jakarta.annotation.PreDestroy"/>
+    <fullyQualifiedTypeName name="org.springframework.context.annotation.AnnotationConfigApplicationContext"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.config.SingletonBeanRegistry"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="javax.security.auth.message.callback.PrivateKeyCallback.Request"/>
+    <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
+    <fullyQualifiedTypeName name="library.service.FileuploadService"/>
+    <fullyQualifiedTypeName name="library.dao.fileDAO"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="library.dto.fileDTO"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.ObjectProvider"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.DisplayName"/>
+    <fullyQualifiedTypeName name="java.util.ServiceLoader.Provider"/>
+    <fullyQualifiedTypeName name="jakarta.inject.Provider"/>
+    <fullyQualifiedTypeName name="com.scope.SingleTonTest.SingleTon"/>
+    <fullyQualifiedTypeName name="com.scope.SingleTonWithPrototypeTest.Prototype1"/>
+    <fullyQualifiedTypeName name="com.scope.SingleTonWithPrototypeTest2.Prototype1"/>
 </qualifiedTypeNameHistroy>

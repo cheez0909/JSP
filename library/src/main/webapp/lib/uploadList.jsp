@@ -14,12 +14,9 @@
 <thead>
 <tr>
 <th>파일번호</th>
-<th>제목</th>
-<th>아이디</th>
-<th>카테고리</th>
 <th>원본파일명</th>
 <th>저장파일명</th>
-<th>등록일</th>
+<th>제목</th>
 </tr>
 </thead>
 <tbody>
@@ -27,16 +24,12 @@
 <c:forEach var="filedto" items="${list }">
 <tr>
 <td>${filedto.file_no }</td>
-<td>${filedto.name }</td>
-<td>${filedto.title }</td>
-<td>${filedto.cate }</td>
 <td>${filedto.ofile }</td>
 <td>${filedto.sfile }</td>
-<td>${filedto.postdate }</td>
+<td><a href = "/lib/fileDownload.jsp?ofile=${filedto.ofile }&sfile=${filedto.sfile }">${filedto.title }</a></td>
 </tr>
 </c:forEach>
 </c:if>
-
 </tbody>
 </table>
 </body>
